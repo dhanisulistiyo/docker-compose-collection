@@ -1,0 +1,22 @@
+version: "3.2"
+services:
+ redis:
+    image: redis:latest
+    command: redis-server --save 60 1 --requirepass Test123 --loglevel warning
+    ports:
+      - 6379:6379
+    volumes:
+        - redis_data:/data
+    restart: always
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
+      - wifi
+
+volumes:
+  redis_data:
+
+# networking for the Redis container
+networks:
+  wifi:
+    driver: bridge
