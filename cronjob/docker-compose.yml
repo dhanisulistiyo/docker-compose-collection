@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  mongo-backup:
+    image: "istepanov/mongodump:4.2"
+    volumes:
+      - ./mongo-backup:/backup
+    environment:
+      # MONGO_URI: "mongodb://l30p4rd:fl4shjust1c3@156.67.217.44:27927/db-project"
+      MONGO_URI: "mongodb://l30p4rd:fl4shjust1c3@172.23.0.2:27017/db-project"
+      CRON_SCHEDULE: "*/1 * * * *"
+    networks: 
+      - my-proxy-net
+
+networks:
+  my-proxy-net:
+    external:
+      name: mongodb_wifi
